@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+DIR="$( dirname "${BASH_SOURCE[0]}" )"
+PWD="$( cd "$DIR" && pwd )"
+
+echo "Unlinking vim configuration: $PWD"
+
+unlink ~/.vimrc
+unlink ~/.vim

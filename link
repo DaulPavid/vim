@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+DIR="$( dirname "${BASH_SOURCE[0]}" )"
+PWD="$( cd "$DIR" && pwd )"
+
+echo "Linking vim configuration: $PWD"
+
+if [ -L ~/.vimrc ]; then
+  unlink ~/.vimrc;
+fi
+
+if [ -L ~/.vim ]; then
+  unlink ~/.vim;
+fi
+
+ln -s $PWD/.vimrc ~/.vimrc
+ln -s $PWD ~/.vim
