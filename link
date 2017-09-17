@@ -9,6 +9,11 @@ if [ -L ~/.vimrc ]; then
   unlink ~/.vimrc;
 fi
 
+if [ -d ~/.vim  ]; then
+    echo "Not re-linking since vim directory already exists"
+    exit 3
+fi
+
 if [ -L ~/.vim ]; then
   unlink ~/.vim;
 fi
