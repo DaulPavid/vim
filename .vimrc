@@ -111,6 +111,10 @@ map <F10> :TagsGenerate!<CR>
 " Map CTRL+t to the tagbar toggle
 map <F2> :TagbarToggle<CR>
 
+"" jedi-vim
+let g:jedi#popup_on_dot = 0
+set splitbelow
+
 " Setup the clipboard
 set clipboard+=unnamed
 vmap <C-c> "+y
