@@ -89,10 +89,6 @@ let g:syntastic_check_on_wq = 0
 
 map <F3> :Errors<CR>
 
-"" verilog_systemverilog
-" Settings
-let g:verilog_indent_width = 2
-
 "" SuperTab
 " Enable context based completion
 let g:SuperTabDefaultCompletionType = "context"
