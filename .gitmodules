@@ -36,7 +36,7 @@
 	url = https://github.com/ntpeters/vim-better-whitespace.git
 [submodule "bundle/jedi-vim"]
 	path = bundle/jedi-vim
-	url = git@github.com:davidhalter/jedi-vim.git
+	url = https://github.com/davidhalter/jedi-vim.git
 [submodule "bundle/vim-javascript"]
 	path = bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript
