@@ -16,9 +16,6 @@
 [submodule "themes/onedark.vim"]
 	path = themes/onedark.vim
 	url = https://github.com/joshdick/onedark.vim.git
-[submodule "bundle/supertab"]
-	path = bundle/supertab
-	url = https://github.com/ervandew/supertab.git
 [submodule "bundle/vim-better-whitespace"]
 	path = bundle/vim-better-whitespace
 	url = https://github.com/ntpeters/vim-better-whitespace.git
