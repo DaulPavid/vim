@@ -1,0 +1,11 @@
+#
+# Generated directories
+#
+autoload/
+bundle/onedark.vim
+
+#
+# Generated files
+#
+.netrwhist
+.swp
