@@ -86,7 +86,7 @@ map <F3> :Errors<CR>
 
 "" SuperTab
 " Enable context based completion
-let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = 'context'
 
 " Setup the clipboard
 set clipboard+=unnamed
@@ -94,7 +94,7 @@ vmap <C-c> "+y
 nmap <C-b> "+p
 
 "" VimCompletesMe
-autocmd FileType c let b:vcm_tab_complete = 'c'
+autocmd FileType c let b:vcm_tab_complete = 'omni'
 
 "" fzf
 " Color scheme
