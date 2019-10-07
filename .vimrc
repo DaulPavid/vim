@@ -93,6 +93,9 @@ set clipboard+=unnamed
 vmap <C-c> "+y
 nmap <C-b> "+p
 
+"" VimCompletesMe
+autocmd FileType c let b:vcm_tab_complete = 'c'
+
 "" fzf
 " Color scheme
 let g:fzf_colors = {
