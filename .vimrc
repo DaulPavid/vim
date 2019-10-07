@@ -96,6 +96,10 @@ nmap <C-b> "+p
 "" VimCompletesMe
 autocmd FileType c let b:vcm_tab_complete = 'omni'
 
+" Close the omni complete preview window
+" when a selection is made
+autocmd CompleteDone * pclose
+
 "" fzf
 " Color scheme
 let g:fzf_colors = {
