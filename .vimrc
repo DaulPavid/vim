@@ -5,8 +5,10 @@
 "" General settings
 syntax on
 set number
+set numberwidth=5
 set nocompatible
 set encoding=utf-8
+set diffopt+=vertical
 
 " Remap common keys
 imap jk <Esc>
@@ -49,6 +51,22 @@ set cinoptions+=g0
 
 " Stop vim from indenting in namespaces
 set cinoptions+=N-s
+
+" Auto-write on running commands
+set autowrite
+
+" Disable backups and swap file
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Disable modelines
+set modelines=0
+set nomodeline
+
+" Split panes to the right and bottom
+set splitbelow
+set splitright
 
 " Remember our last cursor position
 " Got this off the Ubuntu Forums. Thanks Sentry!
@@ -101,6 +119,12 @@ autocmd FileType c let b:vcm_tab_complete = 'omni'
 autocmd CompleteDone * pclose
 
 "" fzf
+" Settings
+set grepprg=ag\ --nogroup\ --nocolor
+
+" Set the default fzf command to the silver searcher
+let $FZF_DEFAULT_COMMAND = 'ag --literal --files-with-matches --nocolor --hidden -g ""'
+
 " Color scheme
 let g:fzf_colors = {
 \   'fg':      ['fg', 'Normal'],
@@ -121,11 +145,7 @@ let g:fzf_colors = {
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " Key bindings
-let g:fzf_action = {
-\   'ctrl-t': 'tab split',
-\   'ctrl-x': 'split',
-\   'ctrl-v': 'vsplit' }
+nnoremap <c-p> :FZF<cr>
 
 " fzf layout
 let g:fzf_layout = { 'down': '~35%' }
-
