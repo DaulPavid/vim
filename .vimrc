@@ -19,8 +19,8 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Highlight matching closes
 set showmatch
@@ -99,6 +99,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_c_include_dirs = ['src/include', 'include']
 
 map <F3> :Errors<CR>
 
