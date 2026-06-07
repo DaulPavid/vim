@@ -1,22 +1,26 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-DIR="$( dirname "${BASH_SOURCE[0]}" )"
-PWD="$( cd "$DIR" && pwd )"
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BACKUP="$HOME/.vim-backup/$(date +%Y%m%d-%H%M%S)"
 
-echo "Linking vim configuration: $PWD"
+echo "Linking vim configuration: $ROOT"
 
-if [ -L ~/.vimrc ]; then
-  unlink ~/.vimrc;
-fi
+# dst -> src  (~/.vim points at the repo so native packages resolve)
+link_one() {
+    local src="$1" dst="$2" rel="${2#$HOME/}"
+    if [ -L "$dst" ]; then
+        unlink "$dst"
+    elif [ -e "$dst" ]; then
+        mkdir -p "$BACKUP"
+        mv "$dst" "$BACKUP/${rel#.}"
+        echo "  backed up ~/$rel"
+    fi
+    ln -s "$src" "$dst"
+    echo "  linked ~/$rel"
+}
 
-if [ -d ~/.vim  ]; then
-    echo "Not re-linking since vim directory already exists"
-    exit 3
-fi
+link_one "$ROOT/.vimrc" "$HOME/.vimrc"
+link_one "$ROOT"        "$HOME/.vim"
 
-if [ -L ~/.vim ]; then
-  unlink ~/.vim;
-fi
-
-ln -s $PWD/.vimrc ~/.vimrc
-ln -s $PWD ~/.vim
+echo "Done."

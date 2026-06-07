@@ -1,31 +1,9 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-DIR="$( dirname "${BASH_SOURCE[0]}" )"
-PWD="$( cd "$DIR" && pwd )"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Setting up the Pauly D. vim configuration"
+echo "Fetching vim plugins (git submodules)..."
+git -C "$DIR" submodule update --init --recursive
 
-###########################
-# Config Initialization   #
-###########################
-
-echo "Initialize the git submodules..."
-mkdir -p autoload
-git submodule update --init --recursive
-
-###########################
-# Pathogen Installation   #
-###########################
-
-echo "Install vim-pathogen..."
-PLUGIN=vim-pathogen
-cp -r $PWD/plugins/$PLUGIN/autoload .
-
-###########################
-# Theme(s) Installation   #
-###########################
-
-echo "Install vim theme(s)..."
-ln -s $PWD/themes/onedark.vim bundle/onedark.vim
-
-echo "Finished the setup."
+echo "Done."
