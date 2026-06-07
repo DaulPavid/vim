@@ -1,132 +1,86 @@
-"=============================
+"==============================
 " DaulPavid VIM Configuration "
-"=============================
+"==============================
 
-"" General settings
+"" General
+set nocompatible
 syntax on
+filetype plugin indent on
+set encoding=utf-8
 set number
 set numberwidth=5
-set nocompatible
-set encoding=utf-8
-set diffopt+=vertical
-
-" Remap common keys
-imap jk <Esc>
-
-" Tabs and spaces
-set expandtab
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-
-" Highlight matching closes
 set showmatch
-
-" Use the tags file from the current directory
-set tags+=tags;/
-
-" Text and wrapping
-set history=500
-set tw=80
-set textwidth=80
-
-" Color text that goes beyond 80 columns
-set colorcolumn=80
-
-" Highlight search
 set hlsearch
 set incsearch
-
-" Reduce the processing by not redrawing unless something is typed
+set history=500
+set textwidth=80
+set colorcolumn=80
+set autowrite
+set splitbelow splitright
+set diffopt+=vertical
+set updatetime=100
 set lazyredraw
+set completeopt=menuone,noselect
+set clipboard^=unnamed,unnamedplus
 
-" Indicate fast terminal connection
-set ttyfast
+"" No swap/backup
+set nobackup nowritebackup noswapfile
 
-" Stop vim from indenting public/private keywords
+"" Modelines off
+set modelines=0 nomodeline
+
+"" Tabs and spaces
+set expandtab shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType javascript,typescript,html,css,scss,json,yaml
+      \ setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+"" C indenting
 set cinoptions+=g0
-
-" Stop vim from indenting in namespaces
 set cinoptions+=N-s
 
-" Auto-write on running commands
-set autowrite
+"" Tags
+set tags+=tags;/
 
-" Disable backups and swap file
-set nobackup
-set nowritebackup
-set noswapfile
+"" Restore last cursor position
+autocmd BufReadPost *
+      \ if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-" Disable modelines
-set modelines=0
-set nomodeline
-
-" Split panes to the right and bottom
-set splitbelow
-set splitright
-
-" Remember our last cursor position
-" Got this off the Ubuntu Forums. Thanks Sentry!
-autocmd BufReadPost * if line ("'\"") > 1 && line("'\"") <= line ("$") | exe "normal! g'\"" | endif
-
-"" Load Pathogen
-filetype off
-execute pathogen#infect()
-execute pathogen#helptags()
-filetype plugin indent on
-
-"" Load the onedark theme
-colorscheme onedark
-
-"" Airline
-" There are no colors without this
-set t_Co=256
-" The status doesn't show until a split without this
-set laststatus=2
-" There might be a pause when leaving insert mode without this
-set ttimeoutlen=50
-
-"" Syntastic
-" Recommended settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_c_include_dirs = ['src/include', 'include']
-
-map <F3> :Errors<CR>
-
-"" SuperTab
-" Enable context based completion
-let g:SuperTabDefaultCompletionType = 'context'
-
-" Setup the clipboard
-set clipboard+=unnamed
-vmap <C-c> "+y
-nmap <C-b> "+p
-
-"" VimCompletesMe
-autocmd FileType c let b:vcm_tab_complete = 'omni'
-
-" Close the omni complete preview window
-" when a selection is made
+"" Close omni-complete preview after selection
 autocmd CompleteDone * pclose
 
-"" fzf
-" Settings
-set grepprg=ag\ --nogroup\ --nocolor
+"" Plugins (native packages)
+packloadall
+silent! helptags ALL
 
-" Set the default fzf command to the silver searcher
-let $FZF_DEFAULT_COMMAND = 'ag --literal --files-with-matches --nocolor --hidden -g ""'
+"" Theme
+if has('termguicolors')
+  set termguicolors
+endif
+let g:onedark_terminal_italics = 1
+colorscheme onedark
 
-" Color scheme
+"" Statusline
+set laststatus=2
+set ttimeoutlen=50
+set statusline=
+set statusline+=\ %f
+set statusline+=\ %m%r%h%w
+set statusline+=%=
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\ %l:%c
+set statusline+=\ %p%%\
+
+"" Whitespace
+let g:better_whitespace_enabled = 1
+let g:strip_whitespace_on_save = 1
+let g:strip_whitespace_confirm = 0
+
+"" fzf (ripgrep)
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
+let g:fzf_layout = { 'down': '~35%' }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_colors = {
 \   'fg':      ['fg', 'Normal'],
 \   'bg':      ['bg', 'Normal'],
@@ -142,11 +96,12 @@ let g:fzf_colors = {
 \   'spinner': ['fg', 'Label'],
 \   'header':  ['fg', 'Comment'] }
 
-" Enable command history
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-
-" Key bindings
-nnoremap <c-p> :FZF<cr>
-
-" fzf layout
-let g:fzf_layout = { 'down': '~35%' }
+"" Keymaps (leader = Space)
+let mapleader = " "
+inoremap jk <Esc>
+nnoremap <C-p>     :Files<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>g :Rg<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>/ :nohlsearch<CR>

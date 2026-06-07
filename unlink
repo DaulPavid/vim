@@ -1,9 +1,35 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-DIR="$( dirname "${BASH_SOURCE[0]}" )"
-PWD="$( cd "$DIR" && pwd )"
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BACKUP_ROOT="$HOME/.vim-backup"
 
-echo "Unlinking vim configuration: $PWD"
+echo "Unlinking vim configuration: $ROOT"
 
-unlink ~/.vimrc
-unlink ~/.vim
+# Restore $name from the most recent backup that contains it.
+restore() {
+    local name="$1" dst="$2" b
+    [ -d "$BACKUP_ROOT" ] || return 0
+    while IFS= read -r b; do
+        if [ -e "$b/$name" ] || [ -L "$b/$name" ]; then
+            cp -a "$b/$name" "$dst"
+            echo "  restored ~/.$name"
+            return 0
+        fi
+    done < <(find "$BACKUP_ROOT" -mindepth 1 -maxdepth 1 -type d | sort -r)
+}
+
+# dst -> src it must point at, backup-name
+unlink_one() {
+    local dst="$1" src="$2" name="$3" rel="${1#$HOME/}"
+    if [ -L "$dst" ] && [ "$( readlink -f "$dst" )" = "$( readlink -f "$src" )" ]; then
+        unlink "$dst"
+        echo "  unlinked ~/$rel"
+        restore "$name" "$dst"
+    fi
+}
+
+unlink_one "$HOME/.vimrc" "$ROOT/.vimrc" "vimrc"
+unlink_one "$HOME/.vim"   "$ROOT"        "vim"
+
+echo "Done. Backups under ~/.vim-backup are left in place."

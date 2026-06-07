@@ -1,30 +1,24 @@
-[submodule "plugins/vim-pathogen"]
-	path = plugins/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen.git
-[submodule "bundle/vim-fugitive"]
-	path = bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-[submodule "bundle/vim-airline"]
-	path = bundle/vim-airline
-	url = https://github.com/vim-airline/vim-airline.git
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
-[submodule "bundle/vim-gitgutter"]
-	path = bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "themes/onedark.vim"]
-	path = themes/onedark.vim
+[submodule "pack/plugins/start/onedark.vim"]
+	path = pack/plugins/start/onedark.vim
 	url = https://github.com/joshdick/onedark.vim.git
-[submodule "bundle/vim-better-whitespace"]
-	path = bundle/vim-better-whitespace
-	url = https://github.com/ntpeters/vim-better-whitespace.git
-[submodule "bundle/fzf.vim"]
-	path = bundle/fzf.vim
-	url = https://github.com/junegunn/fzf.vim.git
-[submodule "bundle/fzf"]
-	path = bundle/fzf
+[submodule "pack/plugins/start/fzf"]
+	path = pack/plugins/start/fzf
 	url = https://github.com/junegunn/fzf.git
-[submodule "bundle/vim-gutentags"]
-	path = bundle/vim-gutentags
-	url = https://github.com/ludovicchabant/vim-gutentags.git
+[submodule "pack/plugins/start/fzf.vim"]
+	path = pack/plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "pack/plugins/start/vim-gitgutter"]
+	path = pack/plugins/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "pack/plugins/start/vim-better-whitespace"]
+	path = pack/plugins/start/vim-better-whitespace
+	url = https://github.com/ntpeters/vim-better-whitespace.git
+[submodule "pack/plugins/start/vim-commentary"]
+	path = pack/plugins/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule "pack/plugins/start/vim-surround"]
+	path = pack/plugins/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "pack/plugins/start/vim-repeat"]
+	path = pack/plugins/start/vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
